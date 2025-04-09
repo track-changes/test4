@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Price TRX</title>
+  <base href="/">
+  <meta name="theme-color" content="#121212">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, viewport-fit=cover, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link href="css/style.min.css" type="text/css" rel="stylesheet">
+  <script src="js/vendor.min.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+
+<body class="body">
+  <script type="text/javascript">
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+          m[i].l=1*new Date();
+          for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+          k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+      (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+       
+      ym(99489613, "init", {
+          clickmap:true,
+          trackLinks:true,
+          accurateTrackBounce:true,
+          webvisor:true
+      });
+    </script>
+  <noscript>
+    <div>
+      <img src="https://mc.yandex.ru/watch/99489613" style="position:absolute; left:-9999px;" alt="">
+    </div>
+  </noscript>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HP763EG55X"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      
+      gtag('config', 'G-HP763EG55X');
+    </script>
+  <header class="header">
+    <div class="container">
+      <div class="header__inner">
+        <a class="header__logo" href="/">
+          <img src="img/icons/logo.svg" alt="FeeSaver">
+        </a>
+        <nav class="header__menu js-burgerMenu">
+          <ul class="header__links">
+            <li class="header__links-item">
+              <a class="header__link" href="about.html">About us</a>
+            </li>
+            <li class="header__links-item">
+              <a class="header__link" href="pricing.html">Pricing plans</a>
+            </li>
+            <li class="header__links-item">
+              <a class="header__link" href="api.html">API </a>
+            </li>
+            <li class="header__links-item">
+              <a class="header__link" href="https://feesaver.gitbook.io/docs" target="_blank">Docs</a>
+            </li>
+            <li class="header__links-item">
+              <a class="header__link" href="blog.html">Blog</a>
+            </li>
+            <li class="header__links-item">
+              <a class="header__tg" href="https://t.me/FeeSaver_bot" target="_blank" onclick="ym(99489613, 'reachGoal', 'join-telegram'); return true;" value="Заказать">
+                <img src="img/icons/logo-mini.svg" alt="FeeSaver">
+                <span>FeeSaver_bot</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="header__language">
+          <button class="header__language-button js-languageButton" aria-expanded="false" aria-controls="language-list" aria-label="Select language">
+            <span class="header__language-current js-languageCurrent">En</span>
+          </button>
+          <ul class="header__language-list js-languageList hidden" id="language-list" role="listbox" aria-labelledby="language-selector-label">
+            <li class="header__language-item js-languageItem" data-language="ru" role="option" tabindex="0">Русский</li>
+          </ul>
+        </div>
+        <button class="header__burger js-burgerOpener" type="button"></button>
+      </div>
+    </div>
+  </header>
+  <main class="main">
+    <section class="price-page">
+      <div class="container">
+        <button class="back js-backBtn" type="button">Back</button>
+        <ul class="breadcrumbs">
+          <li class="breadcrumb">
+            <a href="/">Main Page</a>
+          </li>
+          <li class="breadcrumb">Цена TRX</li>
+        </ul>
+        <div class="price-inner">
+          <div class="price-chart">
+            <div class="price-chart__head">
+              <div class="price-chart__name">
+                <img src="img/crypto/trx.svg" alt="TRX">
+                <h2>TRON Price (TRX)</h2>
+              </div>
+              <div class="price-chart__price">
+                1 TRX = <b class="js-chartPrice">-</b>
+              </div>
+              <div class="price-chart__change">
+                <b class="js-priceChange">-0.88%</b>
+                <span>за 24 часа</span>
+              </div>
+            </div>
+            <div class="price-chart__info">
+              <div class="price-chart__switches">
+                <div class="price-chart__switch">
+                  <input class="js-switchChart" type="radio" name="interval" id="1d" hidden>
+                  <label for="1d">1д</label>
+                </div>
+                <div class="price-chart__switch">
+                  <input class="js-switchChart" type="radio" name="interval" id="7d" hidden>
+                  <label for="7d">7д</label>
+                </div>
+                <div class="price-chart__switch">
+                  <input class="js-switchChart" type="radio" name="interval" id="1m" hidden checked>
+                  <label for="1m">1м</label>
+                </div>
+                <div class="price-chart__switch">
+                  <input class="js-switchChart" type="radio" name="interval" id="3m" hidden>
+                  <label for="3m">3м</label>
+                </div>
+                <div class="price-chart__switch">
+                  <input class="js-switchChart" type="radio" name="interval" id="1y" hidden>
+                  <label for="1y">1г</label>
+                </div>
+              </div>
+            </div>
+            <div class="price-chart__wrap">
+              <div class="tradingview-widget-container" id="tradingview_chart" style="height:100%; width:100%"></div>
+            </div>
+          </div>
+          <aside class="price-sidebar">
+            <div class="price-info">
+              <div class="price-info__inner">
+                <h5 class="price-info__title">Рыночная информация TRX</h5>
+                <div class="price-info__blocks">
+                  <div class="price-info__block">
+                    <div class="price-info__label price-info__label--hint js-tooltip">Популярность:</div>
+                    <div class="price-info__tooltip">Популярность основана на относительной рыночной капитализации активов</div>
+                    <div class="price-info__value">#10</div>
+                  </div>
+                  <div class="price-info__block">
+                    <div class="price-info__label">Объем (24ч):</div>
+                    <div class="price-info__value js-infoValue">-</div>
+                  </div>
+                  <div class="price-info__block">
+                    <div class="price-info__label">Рын. кап.:</div>
+                    <div class="price-info__value js-infoCap">-</div>
+                  </div>
+                  <div class="price-info__block">
+                    <div class="price-info__label">Дата выпуска:</div>
+                    <div class="price-info__value">31.08.2017</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="price-survey">
+              <div class="price-survey__inner">
+                <h5 class="price-survey__title">Что думаете о цене TRX?</h5>
+                <div class="price-survey__lines js-surveyLines">
+                  <div class="price-survey__line price-survey__line--green js-likeLine"></div>
+                  <div class="price-survey__line price-survey__line--red js-dislikeLine"></div>
+                </div>
+                <div class="price-survey__btns">
+                  <div class="price-survey__btn">
+                    <input type="radio" hidden id="like" name="survey">
+                    <label for="like">
+                      Хорошо <span class="js-likeCounter">11</span>
+                    </label>
+                  </div>
+                  <div class="price-survey__btn price-survey__btn price-survey__btn--dislike">
+                    <input type="radio" hidden id="dislike" name="survey">
+                    <label for="dislike">
+                      Плохо <span class="js-dislikeCounter">4</span>
+                    </label>
+                  </div>
+                </div>
+                <p class="price-survey__hint">Данная информация предоставлена для справки</p>
+              </div>
+            </div>
+            <div class="price-banner">
+              <div class="price-banner__inner">
+                <div class="price-banner__logo">FeeSaver</div>
+                <h3 class="price-banner__title">ЭКОНОМЬТЕ ДО 80% </h3>
+                <div class="price-banner__subtitle">на транзакциях в сети TRON</div>
+                <p class="price-banner__text">Покупайте энергию для транзакций в нашем сервисе</p>
+                <a class="price-banner__link" href="https://t.me/FeeSaver_bot" target="_blank">Купить энергию</a>
+              </div>
+            </div>
+          </aside>
+          <article class="price-description">
+            <h3>Цена TRX сегодня</h3>
+            <p id="tronInfo">Актуальная цена TRON составляет <span class="js-priceText"></span> за (TRX/USDT) при текущей рыночной капитализации <span class="js-marketCap"></span>. Объём торгов за 24 часа — <span class="js-volumeText">-</span>. Курс TRX к USDT обновляется в режиме реального времени. За последние 24 часа TRON изменился на <span class="js-priceChangeText">-</span>, при этом циркулирующее предложение составляет <span class="js-circulatingSupply"></span> TRX.</p>
+            <h3>Что такое TRON (TRX)?</h3>
+            <p>TRON — одна из самых широко используемых публичных блокчейн-сетей, насчитывающая 100 миллионов пользователей и более 3,4 миллиарда транзакций за всё время работы. Цель сети TRON — децентрализовать распространение контента и создать основу для работы будущих Web3-платформ. Цена TRON обновляется в режиме реального времени на Binance.</p>
+            <p>Изначально TRON был разработан как децентрализованная платформа для распространения контента, однако со временем его возможности значительно расширились. Сегодня это один из крупнейших блокчейнов для децентрализованных приложений (dApp). Экосистема TRON включает в себя несколько масштабируемых и адаптивных проектов, таких как побочная сеть dApp — Sun Network.</p>
+            <p>Сеть TRON поддерживает широкий спектр функций, включая децентрализованные приложения (dApps), смарт-контракты, а также консенсусный механизм Delegated Proof-of-Stake (DPoS). Кроме того, TRON обладает возможностями выпуска стейблкоинов. На сегодняшний день в сети TRON циркулирует наибольший объём стейблкоина USD Tether (USDT), причём в начале 2021 года TRON обогнал по этому показателю сеть Ethereum.</p>
+            <p>Важно отметить, что TRON является полностью децентрализованным проектом, который управляется сообществом через децентрализованную автономную организацию (DAO). В сети TRON используется Тьюринг-полная виртуальная машина (TRON Virtual Machine, TVM), а её смарт-контракты совместимы со стандартом токенов TRC-20. Родной токен сети — TRX.</p>
+          </article>
+          <div class="price-description__links">
+            <h4 class="price-description__title">Полезные ссылки</h4>
+            <div class="price-description__list">
+              <a class="price-description__item price-description__item--whitepaper" href="https://developers.tron.network/docs/getting-start" target="_blank">Whitepaper</a>
+              <a class="price-description__item price-description__item--site" href="https://trondao.org/" target="_blank">Официальный сайт</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="faq js-faqSection">
+      <div class="container">
+        <div class="faq__header">
+          <h2 class="faq__title">FAQ</h2>
+          <p class="faq__subtitle">In this section, you will find answers to the most popular questions about our service. We have made an effort to gather all the necessary information to make using the platform as convenient and straightforward as possible.</p>
+          <a class="faq__link" href="https://feesaver.gitbook.io/docs" target="_blank">FeeSaver Wiki</a>
+        </div>
+        <div class="faq__content">
+          <ol class="faq__list">
+            <li class="faq__item js-faqItem">
+              <div class="faq__question js-faqQuestion">
+                <span class="faq__text">Do I need to grant access from my wallet to your service?</span>
+                <button class="faq__toggle" type="button" aria-label="Show answer"></button>
+              </div>
+              <div class="faq__answer">Energy in the <a href="#">TRON</a> network is a resource used to execute smart contracts. Instead of paying fees for every transaction, you can burn energy to save on fees. This is especially useful for users actively interacting with smart contracts, including USDT TRC-20 smart contracts.</div>
+            </li>
+            <li class="faq__item js-faqItem">
+              <div class="faq__question js-faqQuestion">
+                <span class="faq__text">If I want to transfer my USDT to another address using your solution, do I need to send the USDT to you?</span>
+                <button class="faq__toggle" type="button" aria-label="Show answer"></button>
+              </div>
+              <div class="faq__answer">
+                <p>
+                  <strong>Method 1: Burn TRX</strong>
+                </p>
+                <p>TRX is automatically burned during transactions if you don’t have enough energy.</p>
+                <p>
+                  <strong>Method 2: Freeze TRX</strong>
+                </p>
+                <p>You can stake TRX to receive energy, but this requires a significant amount, and your funds remain locked.</p>
+                <p>
+                  <strong>Method 3: Rent energy through FeeSaver</strong>
+                </p>
+                <p>FeeSaver allows you to rent energy without freezing or burning TRX. For example, renting 132,000 energy (1-2 transactions) costs only 12 TRX, while burning TRX could cost around 28 TRX. This helps save up to 60% on fees.</p>
+              </div>
+            </li>
+            <li class="faq__item js-faqItem">
+              <div class="faq__question js-faqQuestion">
+                <span class="faq__text">How much energy is spent for 1 transfer?</span>
+                <button class="faq__toggle" type="button" aria-label="Show answer"></button>
+              </div>
+              <div class="faq__answer">You will receive energy within 5-10 seconds after payment. You can order energy for 1, 3, 24 hours, 3 days, 1 week, and 1 month. To get better terms, use the "Auto-Renew" feature. After payment, the energy will be sent to your address for the entire rental period or until it is completely used.</div>
+            </li>
+            <li class="faq__item js-faqItem">
+              <div class="faq__question js-faqQuestion">
+                <span class="faq__text">Can I buy energy and transfer it to another wallet?</span>
+                <button class="faq__toggle" type="button" aria-label="Show answer"></button>
+              </div>
+              <div class="faq__answer">If you use Trust Wallet, you must have at least 28 TRX in your balance, even if energy is available. For example, if the fee shows as 13.49 TRX, purchase 65,150 energy. If the fee is 27.74 TRX, you will need 130,300 energy. After verifying the energy delivery, you can complete your USDT transfer.</div>
+            </li>
+            <li class="faq__item js-faqItem">
+              <div class="faq__question js-faqQuestion">
+                <span class="faq__text">How much can I save with the bot?</span>
+                <button class="faq__toggle" type="button" aria-label="Show answer"></button>
+              </div>
+              <div class="faq__answer">Follow the detailed Flexible Energy Purchase or Instant Energy Purchase instructions.</div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-head">
+          <div class="footer__logo">
+            <img src="img/icons/logo-gray.svg" alt="FeeSaver">
+          </div>
+          <ul class="footer__socials socials">
+            <li>
+              <a class="social social--x" href="https://x.com/feesaver_com" target="_blank" aria-label="FeeSaver X"></a>
+            </li>
+            <li>
+              <a class="social social--telegram" href="https://t.me/feesaver_ann" target="_blank" aria-label="FeeSaver Telegram"></a>
+            </li>
+            <li>
+              <a class="social social--youtube" href="https://www.youtube.com/@FeeSaver" target="_blank" aria-label="FeeSaver YouTube"></a>
+            </li>
+          </ul>
+          <div class="footer__details footer__details--tablet">
+            <b>TRUE SOFT SOLUTIONS - FZCO</b>
+            <span>UAE, Dubai, Dubai Digital Park, А1</span>
+            <a href="tel:+97142285285">+971 4 228 52 85</a>
+          </div>
+          <a class="footer__trustpilot footer__trustpilot--tablet" href="https://www.trustpilot.com/review/feesaver.com" target="_blank">
+            <b>FeeSaver на</b>
+            <img src="img/icons/star.svg" alt="">
+            <span>Trustpilot</span>
+          </a>
+        </div>
+        <div class="footer__links">
+          <div class="footer__links-box js-footerLinksBox">
+            <div class="footer__links-toggle js-footerLinksToggle">Компания</div>
+            <ul class="footer__links-list js-footerLinksList">
+              <li class="footer__link">
+                <a href="about.html">О нас</a>
+              </li>
+              <li class="footer__link">
+                <a href="pricing.html">Тарифы</a>
+              </li>
+              <li class="footer__link">
+                <a href="contact.html">Контакты</a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer__links-box js-footerLinksBox">
+            <div class="footer__links-toggle js-footerLinksToggle">Пользователю</div>
+            <ul class="footer__links-list js-footerLinksList">
+              <li class="footer__link">
+                <a href="https://t.me/FeeSaver_bot" target="_blank" onclick="ym(99489613, 'reachGoal', 'join-telegram'); return true;" value="Заказать">Покупка энергии</a>
+              </li>
+              <li class="footer__link">
+                <a href="referral.html">Реферальная программа</a>
+              </li>
+              <li class="footer__link">
+                <a href="https://t.me/FeeSaver_support" target="_blank">Поддержка</a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer__links-box js-footerLinksBox">
+            <div class="footer__links-toggle js-footerLinksToggle">Ресурсы</div>
+            <ul class="footer__links-list js-footerLinksList">
+              <li class="footer__link">
+                <a href="https://feesaver.gitbook.io/docs" target="_blank">Документация</a>
+              </li>
+              <li class="footer__link">
+                <a href="blog.html">Блог</a>
+              </li>
+              <li class="footer__link">
+                <a href="price.html">Цена TRX</a>
+              </li>
+              <li class="footer__link">
+                <a href="commission.html">Tron Gas</a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer__links-box js-footerLinksBox">
+            <div class="footer__links-toggle js-footerLinksToggle">Бизнесу</div>
+            <ul class="footer__links-list js-footerLinksList">
+              <li class="footer__link">
+                <a href="api.html">Покупка по API </a>
+              </li>
+              <li class="footer__link">
+                <a href="https://api.feesaver.com/swagger/index.html" target="_blank" onclick="ym(99489613, 'reachGoal', 'api-docs'); return true;" value="Заказать">Документация API</a>
+              </li>
+              <li class="footer__link">
+                <a href="https://t.me/FeeSaver_manager" target="_blank">Связь с менеджером</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-info">
+          <div class="footer__details">
+            <b>TRUE SOFT SOLUTIONS - FZCO</b>
+            <span>UAE, Dubai, Dubai Digital Park, А1</span>
+            <a href="tel:+97142285285">+971 4 228 52 85</a>
+          </div>
+          <div class="footer__copyright">© feesaver.com Copyright 2025
+            <br>All Rights Reserved
+          </div>
+          <div class="footer__tron">
+            <span>Based on </span>
+            <img src="img/icons/tron.svg" alt="Tron">
+            <span>Tron</span>
+          </div>
+          <ul class="footer__socials footer__socials--tablet socials">
+            <li>
+              <a class="social social--x" href="https://x.com/feesaver_com" target="_blank" aria-label="FeeSaver X"></a>
+            </li>
+            <li>
+              <a class="social social--telegram" href="https://t.me/feesaver_ann" target="_blank" aria-label="FeeSaver Telegram"></a>
+            </li>
+            <li>
+              <a class="social social--youtube" href="https://www.youtube.com/@FeeSaver" target="_blank" aria-label="FeeSaver YouTube"></a>
+            </li>
+          </ul>
+          <a class="footer__trustpilot" href="https://www.trustpilot.com/review/feesaver.com" target="_blank">
+            <b>FeeSaver на</b>
+            <img src="img/icons/star.svg" alt="">
+            <span>Trustpilot</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <div class="cookie js-cookie">
+    <div class="cookie-inner">
+      <p class="cookie__text">Оставаясь на сайте, вы соглашаетесь с использованием файлов cookie для улучшения пользовательского опыта, персонализации контента и аналитики</p>
+      <button class="cookie__btn" type="button">Хорошо</button>
+      <div class="cookie__img">
+        <img src="img/icons/cookie.svg" alt="Cookie">
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
