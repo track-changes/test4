@@ -767,7 +767,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     let globalPricingData = null;
     let globalDiscountData = null;
     try {
-        const response = await fetch('https://api.feesaver.com/common/prices');
+        // Для тестирования можно использовать 'https://test.feesaver.com/common/prices'
+        const response = await fetch('https://test.feesaver.com/common/prices');
         if (!response.ok) {
             throw new Error('Ошибка сети: ' + response.status);
         }
@@ -776,10 +777,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         globalDiscountData = data.result.discounts;
         globalSmartModePrice = data.result.smartModePrice;
 
-        // Рендерим таблицу (purchase‑режим)
+        // Рендерим таблицу (purchase-режим)
         renderDiscounts(globalDiscountData);
         renderPrices(globalPricingData, globalDiscountData, activeCurrency, trxRate);
-        // Обновляем smart‑режим (без объёмов)
+        // Обновляем smart-режим (без обработки объёмов)
         updateSmartMode(globalSmartModePrice, activeCurrency, trxRate);
 
         // Добавляем класс loaded, сигнализирующий о завершении загрузки таблицы
@@ -801,7 +802,6 @@ document.addEventListener("DOMContentLoaded", async function () {
             activeCurrency = button.getAttribute('data-currency');
             renderPrices(globalPricingData, globalDiscountData, activeCurrency, trxRate);
             updateSmartMode(globalSmartModePrice, activeCurrency, trxRate);
-            console.log('Выбрана валюта', activeCurrency.toUpperCase());
         });
     });
 });
@@ -821,7 +821,7 @@ function formatPrice(num) {
 }
 
 /* ============================
-   Функция форматирования цены для smart‑режима
+   Функция форматирования цены для smart-режима
    Округляет до двух знаков, разделяя группы пробелами, десятичный разделитель — точка
 ============================ */
 function formatSmartPrice(num) {
@@ -863,57 +863,48 @@ function renderDiscounts(discounts) {
 }
 
 /* ============================
-   Функция рендера прайсов (purchase‑режим)
+   Функция рендера прайсов (purchase-режим)
+   Всего строк = 1 (базовая, discount = 0) + discountData.length
 ============================ */
 function renderPrices(prices, discountData, activeCurrency, trxRate) {
     prices.forEach(priceObj => {
         const pricingCol = document.querySelector(`.pricing__table-col[data-col="${priceObj.duration}"]`);
         if (pricingCol) {
-            // Удаляем существующие ячейки с ценой, оставляя заголовок
             pricingCol.querySelectorAll('.js-pricingValue').forEach(el => el.remove());
-
-            // Общее количество строк определяется по количеству строк в столбце "1h"
             const rowCount = 1 + discountData.length;
-            // Вычисляем базовую цену (в зависимости от валюты)
-            let basePrice = priceObj.amount;
-            let convertedAmount;
-            if (activeCurrency === 'sun') {
-                convertedAmount = basePrice * 0.65;
-            } else if (activeCurrency === 'trx') {
-                convertedAmount = basePrice * 0.065;
-            } else if (activeCurrency === 'usdt') {
-                convertedAmount = basePrice * 0.065 * (trxRate || 1);
-            }
+            for (let i = 0; i < rowCount; i++) {
+                const cell = document.createElement('div');
+                cell.classList.add('pricing__table-value', 'js-pricingValue');
 
-            // Если это столбец "1h", проводим пересчёт цены с учетом скидок по строкам
-            if (priceObj.duration === "1h") {
-                for (let i = 0; i < rowCount; i++) {
-                    const cell = document.createElement('div');
-                    cell.classList.add('pricing__table-value', 'js-pricingValue');
-                    // Для первой строки скидка = 0, для остальных берем скидку discountData[i - 1]
-                    let appliedDiscount = i === 0 ? 0 : discountData[i - 1].discount;
-                    let discountedPrice = convertedAmount * (1 - appliedDiscount / 100);
-                    cell.textContent = discountedPrice.toFixed(2) + ' ' + activeCurrency.toUpperCase();
-                    pricingCol.appendChild(cell);
+                let basePrice = priceObj.amount; // цена в SUN
+                let convertedAmount;
+                if (activeCurrency === 'sun') {
+                    convertedAmount = basePrice * 0.65;
+                    // Дополнительное деление для определённых столбцов
+                    if (priceObj.duration === "3d") {
+                        convertedAmount /= 3;
+                    } else if (priceObj.duration === "1w") {
+                        convertedAmount /= 7;
+                    } else if (priceObj.duration === "1m") {
+                        convertedAmount /= 30;
+                    }
+                } else if (activeCurrency === 'trx') {
+                    convertedAmount = basePrice * 0.065;
+                } else if (activeCurrency === 'usdt') {
+                    convertedAmount = basePrice * 0.065 * (trxRate || 1);
                 }
-            } else {
-                // Для остальных столбцов создаём такое же число строк,
-                // но во всех строках отображаем фиксированную цену (без скидок)
-                const fixedPrice = convertedAmount.toFixed(2) + ' ' + activeCurrency.toUpperCase();
-                for (let i = 0; i < rowCount; i++) {
-                    const cell = document.createElement('div');
-                    cell.classList.add('pricing__table-value', 'js-pricingValue');
-                    cell.textContent = fixedPrice;
-                    pricingCol.appendChild(cell);
-                }
+                // Для первой строки скидка 0, для остальных берём discountData[i-1]
+                let appliedDiscount = i === 0 ? 0 : discountData[i - 1].discount;
+                let discountedPrice = convertedAmount * (1 - appliedDiscount / 100);
+                cell.textContent = discountedPrice.toFixed(2) + ' ' + activeCurrency.toUpperCase();
+                pricingCol.appendChild(cell);
             }
         }
     });
 }
 
-
 /* ============================
-   Функция обновления smart‑режима
+   Функция обновления smart-режима
    Обновляет только цены по данным smartModePrice, без обработки объёмов.
    - .js-smartStandartPrice5 и .js-smartStandartPrice: стандартная цена (из amount)
    - .js-smartDoublePrice: двойная цена (2x стандарт)
@@ -943,7 +934,6 @@ function updateSmartMode(smartModePrice, activeCurrency, trxRate) {
         el.textContent = formattedDoublePrice + ' ' + activeCurrency.toUpperCase();
     });
 }
-
 document.addEventListener('DOMContentLoaded', function () {
     var swiper = new Swiper('.js-sliderBlogWrapper', {
         slidesPerView: 1, 
