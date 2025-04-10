@@ -870,13 +870,35 @@ function renderPrices(prices, discountData, activeCurrency, trxRate) {
     prices.forEach(priceObj => {
         const pricingCol = document.querySelector(`.pricing__table-col[data-col="${priceObj.duration}"]`);
         if (pricingCol) {
+            // Удаляем существующие ячейки с ценой, оставляя заголовок
             pricingCol.querySelectorAll('.js-pricingValue').forEach(el => el.remove());
+            // Количество строк определяется по количеству строк в столбце "1h"
             const rowCount = 1 + discountData.length;
-            for (let i = 0; i < rowCount; i++) {
-                const cell = document.createElement('div');
-                cell.classList.add('pricing__table-value', 'js-pricingValue');
-
-                let basePrice = priceObj.amount; // цена в SUN
+            
+            // Если столбец "1h", рассчитываем цену с учётом скидок для каждого ряда
+            if (priceObj.duration === "1h") {
+                for (let i = 0; i < rowCount; i++) {
+                    const cell = document.createElement('div');
+                    cell.classList.add('pricing__table-value', 'js-pricingValue');
+                    
+                    let basePrice = priceObj.amount; // базовая цена в SUN
+                    let convertedAmount;
+                    if (activeCurrency === 'sun') {
+                        convertedAmount = basePrice * 0.65;
+                    } else if (activeCurrency === 'trx') {
+                        convertedAmount = basePrice * 0.065;
+                    } else if (activeCurrency === 'usdt') {
+                        convertedAmount = basePrice * 0.065 * (trxRate || 1);
+                    }
+                    // Для первой строки скидка равна 0, для остальных берём discountData[i-1]
+                    let appliedDiscount = i === 0 ? 0 : discountData[i - 1].discount;
+                    let discountedPrice = convertedAmount * (1 - appliedDiscount / 100);
+                    cell.textContent = discountedPrice.toFixed(2) + ' ' + activeCurrency.toUpperCase();
+                    pricingCol.appendChild(cell);
+                }
+            } else {
+                // Для остальных столбцов скидка не применяется – используем фиксированную цену
+                let basePrice = priceObj.amount;
                 let convertedAmount;
                 if (activeCurrency === 'sun') {
                     convertedAmount = basePrice * 0.65;
@@ -893,15 +915,19 @@ function renderPrices(prices, discountData, activeCurrency, trxRate) {
                 } else if (activeCurrency === 'usdt') {
                     convertedAmount = basePrice * 0.065 * (trxRate || 1);
                 }
-                // Для первой строки скидка 0, для остальных берём discountData[i-1]
-                let appliedDiscount = i === 0 ? 0 : discountData[i - 1].discount;
-                let discountedPrice = convertedAmount * (1 - appliedDiscount / 100);
-                cell.textContent = discountedPrice.toFixed(2) + ' ' + activeCurrency.toUpperCase();
-                pricingCol.appendChild(cell);
+                // Формируем фиксированное текстовое значение
+                const fixedPriceText = convertedAmount.toFixed(2) + ' ' + activeCurrency.toUpperCase();
+                for (let i = 0; i < rowCount; i++) {
+                    const cell = document.createElement('div');
+                    cell.classList.add('pricing__table-value', 'js-pricingValue');
+                    cell.textContent = fixedPriceText;
+                    pricingCol.appendChild(cell);
+                }
             }
         }
     });
 }
+
 
 /* ============================
    Функция обновления smart-режима
