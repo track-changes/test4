@@ -221,62 +221,102 @@
         </div>
       </div>
     </section>
-    <section class="faq js-faqSection">
+    <section class="faq faq--bg js-faqSection">
       <div class="container">
         <div class="faq__header">
-          <h2 class="faq__title">FAQ</h2>
-          <p class="faq__subtitle">In this section, you will find answers to the most popular questions about our service. We have made an effort to gather all the necessary information to make using the platform as convenient and straightforward as possible.</p>
+          <h2 class="faq__title">Часто задаваемые вопросы (FAQ)</h2>
+          <p class="faq__subtitle">В этом разделе вы найдете ответы на самые популярные вопросы о нашем сервисе. Мы постарались собрать всю необходимую информацию, чтобы сделать использование платформы максимально удобным и понятным.</p>
           <a class="faq__link" href="https://feesaver.gitbook.io/docs" target="_blank">FeeSaver Wiki</a>
         </div>
         <div class="faq__content">
           <ol class="faq__list">
-            <li class="faq__item js-faqItem">
-              <div class="faq__question js-faqQuestion">
+            <li class="faq__item js-faqNewItem">
+              <div class="faq__question js-faqNewQuestion">
                 <span class="faq__text">Do I need to grant access from my wallet to your service?</span>
                 <button class="faq__toggle" type="button" aria-label="Show answer"></button>
               </div>
-              <div class="faq__answer">Energy in the <a href="#">TRON</a> network is a resource used to execute smart contracts. Instead of paying fees for every transaction, you can burn energy to save on fees. This is especially useful for users actively interacting with smart contracts, including USDT TRC-20 smart contracts.</div>
+              <div class="faq__accordion">
+                <div class="faq__accordion-animation">
+                  <div class="faq__accordion-wrapper">
+                    <div class="faq__accordion-content">
+                      <div class="faq__answer">Energy in the <a href="#">TRON</a> network is a resource used to execute smart contracts. Instead of paying fees for every transaction, you can burn energy to save on fees. This is especially useful for users actively interacting with smart contracts, including USDT TRC-20 smart contracts.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </li>
-            <li class="faq__item js-faqItem">
-              <div class="faq__question js-faqQuestion">
+            <li class="faq__item js-faqNewItem">
+              <div class="faq__question js-faqNewQuestion">
                 <span class="faq__text">If I want to transfer my USDT to another address using your solution, do I need to send the USDT to you?</span>
                 <button class="faq__toggle" type="button" aria-label="Show answer"></button>
               </div>
-              <div class="faq__answer">
-                <p>
-                  <strong>Method 1: Burn TRX</strong>
-                </p>
-                <p>TRX is automatically burned during transactions if you don’t have enough energy.</p>
-                <p>
-                  <strong>Method 2: Freeze TRX</strong>
-                </p>
-                <p>You can stake TRX to receive energy, but this requires a significant amount, and your funds remain locked.</p>
-                <p>
-                  <strong>Method 3: Rent energy through FeeSaver</strong>
-                </p>
-                <p>FeeSaver allows you to rent energy without freezing or burning TRX. For example, renting 132,000 energy (1-2 transactions) costs only 12 TRX, while burning TRX could cost around 28 TRX. This helps save up to 60% on fees.</p>
+              <div class="faq__accordion">
+                <div class="faq__accordion-animation">
+                  <div class="faq__accordion-wrapper">
+                    <div class="faq__accordion-content">
+                      <div class="faq__answer">
+                        <p>
+                          <strong>Method 1: Burn TRX</strong>
+                        </p>
+                        <p>TRX is automatically burned during transactions if you don’t have enough energy.</p>
+                        <p>
+                          <strong>Method 2: Freeze TRX</strong>
+                        </p>
+                        <p>You can stake TRX to receive energy, but this requires a significant amount, and your funds remain locked.</p>
+                        <p>
+                          <strong>Method 3: Rent energy through FeeSaver</strong>
+                        </p>
+                        <p>FeeSaver allows you to rent energy without freezing or burning TRX. For example, renting 132,000 energy (1-2 transactions) costs only 12 TRX, while burning TRX could cost around 28 TRX. This helps save up to 60% on fees.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </li>
-            <li class="faq__item js-faqItem">
-              <div class="faq__question js-faqQuestion">
+            <li class="faq__item js-faqNewItem">
+              <div class="faq__question js-faqNewQuestion">
                 <span class="faq__text">How much energy is spent for 1 transfer?</span>
                 <button class="faq__toggle" type="button" aria-label="Show answer"></button>
               </div>
-              <div class="faq__answer">You will receive energy within 5-10 seconds after payment. You can order energy for 1, 3, 24 hours, 3 days, 1 week, and 1 month. To get better terms, use the "Auto-Renew" feature. After payment, the energy will be sent to your address for the entire rental period or until it is completely used.</div>
+              <div class="faq__accordion">
+                <div class="faq__accordion-animation">
+                  <div class="faq__accordion-wrapper">
+                    <div class="faq__accordion-content">
+                      <div class="faq__answer">You will receive energy within 5-10 seconds after payment. You can order energy for 1, 3, 24 hours, 3 days, 1 week, and 1 month. To get better terms, use the "Auto-Renew" feature. After payment, the energy will be sent to your address for the entire rental period or until it is completely used.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </li>
-            <li class="faq__item js-faqItem">
-              <div class="faq__question js-faqQuestion">
+            <li class="faq__item js-faqNewItem">
+              <div class="faq__question js-faqNewQuestion">
                 <span class="faq__text">Can I buy energy and transfer it to another wallet?</span>
                 <button class="faq__toggle" type="button" aria-label="Show answer"></button>
               </div>
-              <div class="faq__answer">If you use Trust Wallet, you must have at least 28 TRX in your balance, even if energy is available. For example, if the fee shows as 13.49 TRX, purchase 65,150 energy. If the fee is 27.74 TRX, you will need 130,300 energy. After verifying the energy delivery, you can complete your USDT transfer.</div>
+              <div class="faq__accordion">
+                <div class="faq__accordion-animation">
+                  <div class="faq__accordion-wrapper">
+                    <div class="faq__accordion-content">
+                      <div class="faq__answer">If you use Trust Wallet, you must have at least 28 TRX in your balance, even if energy is available. For example, if the fee shows as 13.49 TRX, purchase 65,150 energy. If the fee is 27.74 TRX, you will need 130,300 energy. After verifying the energy delivery, you can complete your USDT transfer.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </li>
-            <li class="faq__item js-faqItem">
-              <div class="faq__question js-faqQuestion">
+            <li class="faq__item js-faqNewItem">
+              <div class="faq__question js-faqNewQuestion">
                 <span class="faq__text">How much can I save with the bot?</span>
                 <button class="faq__toggle" type="button" aria-label="Show answer"></button>
               </div>
-              <div class="faq__answer">Follow the detailed Flexible Energy Purchase or Instant Energy Purchase instructions.</div>
+              <div class="faq__accordion">
+                <div class="faq__accordion-animation">
+                  <div class="faq__accordion-wrapper">
+                    <div class="faq__accordion-content">
+                      <div class="faq__answer">Follow the detailed Flexible Energy Purchase or Instant Energy Purchase instructions.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </li>
           </ol>
         </div>

@@ -298,6 +298,102 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    const transactionsInput = document.querySelector('.js-inputTransactions');
+    if (transactionsInput) {
+
+        const transactionsSlider = document.getElementById('rangeTransactions');
+        const resultTRXEl = document.querySelector('.js-resultTRX');
+        const resultUSDTEl = document.querySelector('.js-resultUSDT');
+        const resultStrikeEl = document.querySelector('.js-resultStrike');
+        const checkboxMultiply = document.querySelector('.js-checkboxMultiply');
+        const statNumber = document.querySelector('.js-statNumber');
+        let trxUsdtRate = 0;
+
+        fetch('https://api.binance.com/api/v3/ticker/price?symbol=TRXUSDT')
+            .then(response => response.json())
+            .then(data => { trxUsdtRate = parseFloat(data.price); recalc(); })
+            .catch(err => { console.error('TRXUSDT rate error:', err); recalc(); });
+
+        noUiSlider.create(transactionsSlider, {
+            start: [parseInt(transactionsInput.value) || 1],
+            connect: 'lower',
+            step: 1,
+            pips: {
+                mode: 'positions',
+                values: [0, 100],
+                density: 4,
+                format: { to: value => value % 1 === 0 ? Math.round(value) : value }
+            },
+            range: { min: 1, max: 10 }
+        });
+
+        transactionsSlider.noUiSlider.on('update', (values, handle) => {
+            const value = Math.round(values[handle]);
+            transactionsInput.value = value;
+            recalc();
+        });
+
+        transactionsInput.addEventListener('keypress', function (e) {
+            if (!/[0-9]/.test(e.key)) {
+                e.preventDefault();
+            }
+        });
+
+        transactionsInput.addEventListener('paste', function (e) {
+            let pastedText = (e.clipboardData || window.clipboardData).getData('text');
+            if (!/^\d+$/.test(pastedText)) {
+                e.preventDefault();
+            }
+        });
+
+        transactionsInput.addEventListener('input', function () {
+            let value = parseInt(this.value);
+            if (isNaN(value)) return;
+            if (value < 1) value = 1;
+            if (value > 10) value = 10;
+            this.value = value;
+            transactionsSlider.noUiSlider.set(value);
+            recalc();
+        });
+
+        transactionsInput.addEventListener('blur', function () {
+            if (this.value.trim() === '') {
+                this.value = 1;
+                transactionsSlider.noUiSlider.set(1);
+                recalc();
+            }
+        });
+
+        checkboxMultiply.addEventListener('change', recalc);
+
+        function recalc() {
+            const numTransactions = parseInt(transactionsInput.value) || 1;
+            let computedTRX = numTransactions * 6;
+            let strikeValue = numTransactions * 14;
+            if (checkboxMultiply.checked) {
+                computedTRX *= 2;
+                strikeValue *= 2;
+            }
+            resultTRXEl.textContent = computedTRX.toFixed(0) + " TRX";
+            const usdtValue = trxUsdtRate ? computedTRX * trxUsdtRate : 0;
+            resultUSDTEl.textContent = "~" + usdtValue.toFixed(2) + " USD";
+            resultStrikeEl.textContent = strikeValue.toFixed(2) + " TRX";
+            statNumber.textContent = computedTRX.toFixed(0) + " TRX";
+        }
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const faqItem = document.querySelector(".js-faqNewItem");
+    if (faqItem) {
+        document.querySelectorAll('.js-faqNewQuestion').forEach(function (question) {
+            question.addEventListener('click', function () {
+                this.parentElement.classList.toggle('active');
+            });
+        });
+    }
+});
 const faqSection = document.querySelector('.js-faqSection');
 if (faqSection) {
     let questions = faqSection.querySelectorAll('.js-faqQuestion');
@@ -318,6 +414,98 @@ footerLinksBoxs.forEach(box => {
             links.classList.toggle('show');
         });
     }
+});
+document.addEventListener('DOMContentLoaded', function () {
+    let iconsSwap = document.querySelector('.js-iconsSwap');
+    if (iconsSwap) {
+        iconsSwap.addEventListener('click', () => {
+            iconsSwap.classList.toggle('swap');
+        });
+    }
+
+    if (window.matchMedia('(min-width: 1280px)').matches) {
+        let solutionImgs = document.querySelector('.solution__head-imgs');
+        if (solutionImgs) {
+            let circle = solutionImgs.querySelector('.circle');
+            let money = solutionImgs.querySelector('.money');
+            let isInside = false;
+
+            if (circle) circle.style.transition = 'transform 2s ease-out';
+            if (money) money.style.transition = 'transform 2s ease-out';
+
+            solutionImgs.addEventListener('mouseenter', (e) => {
+                const { clientX, clientY } = e;
+                const rect = solutionImgs.getBoundingClientRect();
+                const { offsetWidth, offsetHeight } = solutionImgs;
+
+                // Рассчитываем положение курсора внутри контейнера
+                const x = clientX - rect.left;
+                const y = clientY - rect.top;
+
+                const xPercent = (x / offsetWidth - 0.5) * -2; // инвертированное значение от -1 до 1
+                const yPercent = (y / offsetHeight - 0.5) * -2;
+
+                const maxShiftCircle = 32; // максимальное смещение в пикселях
+                const maxShiftMoney = 16; // максимальное смещение в пикселях
+
+                const shiftXCitcle = xPercent * maxShiftCircle;
+                const shiftYCircle = yPercent * maxShiftCircle;
+                const shiftXMoney = xPercent * maxShiftMoney;
+                const shiftYMoney = yPercent * maxShiftMoney;
+
+
+                if (circle) circle.style.transform = `translate(${shiftXCitcle}px, ${shiftYCircle}px)`;
+                if (money) money.style.transform = `translate(${-shiftXMoney}px, ${-shiftYMoney}px)`;
+
+                setTimeout(() => {
+                    isInside = true;
+                    if (circle) circle.style.transition = 'transform 2s ease-out';
+                    if (money) money.style.transition = 'transform 2s ease-out';
+                }, 2000);
+            });
+
+            solutionImgs.addEventListener('mousemove', (e) => {
+                if (!isInside) return;
+                const { clientX, clientY } = e;
+                const rect = solutionImgs.getBoundingClientRect();
+                const { offsetWidth, offsetHeight } = solutionImgs;
+
+                const x = clientX - rect.left;
+                const y = clientY - rect.top;
+
+                const xPercent = (x / offsetWidth - 0.5) * -2;
+                const yPercent = (y / offsetHeight - 0.5) * -2;
+
+                const maxShiftCircle = 32; // максимальное смещение в пикселях
+                const maxShiftMoney = 16; // максимальное смещение в пикселях
+
+                const shiftXCitcle = xPercent * maxShiftCircle;
+                const shiftYCircle = yPercent * maxShiftCircle;
+                const shiftXMoney = xPercent * maxShiftMoney;
+                const shiftYMoney = yPercent * maxShiftMoney;
+
+                // Обновляем позицию без перехода, чтобы элементы следовали за курсором
+                if (circle) circle.style.transition = '';
+                if (money) money.style.transition = '';
+
+                if (circle) circle.style.transform = `translate(${shiftXCitcle}px, ${shiftYCircle}px)`;
+                if (money) money.style.transform = `translate(${-shiftXMoney}px, ${-shiftYMoney}px)`;
+            });
+
+            solutionImgs.addEventListener('mouseleave', () => {
+                isInside = false;
+                if (circle) {
+                    circle.style.transition = 'transform 2s ease-out';
+                    circle.style.transform = 'translate(0, 0)';
+                }
+                if (money) {
+                    money.style.transition = 'transform 2s ease-out';
+                    money.style.transform = 'translate(0, 0)';
+                }
+            });
+        }
+    }
+
 });
 document.addEventListener("DOMContentLoaded", () => {
     const light = lottie.loadAnimation({
@@ -1053,108 +1241,113 @@ document.addEventListener('DOMContentLoaded', function() {
 
     }
 });
-const radioButtons = document.querySelectorAll('.js-statsRadio');
-
-function handleRadioChange(event) {
-    changeStatNumber();
-
-    const selectedValue = event.target.value;
-    let maxTrans = document.getElementById('rangeTransactions').getAttribute('data-max');
-    let priceOne = 6;
-    //let ratio = 3.35
-    document.getElementById('rangeTrx').setAttribute('data-max', (priceOne * maxTrans).toFixed(2));
-    //document.getElementById('rangePrice').setAttribute('data-max',  (priceOne * maxTrans * ratio).toFixed(2));
-    document.getElementById('rangePrice').setAttribute('data-max',  '140');
-    initializeSlider();
-}
-
-
-function setStatNumber() {
-    const statNumberText = document.querySelector('.js-statNumber span');
-    let current = document.querySelector('.js-inputTRX').value;
-    statNumberText.textContent = current;
-}
-
-function changeStatNumber() {
-    const statNumber = document.querySelector('.js-statNumber');
-    const statNumberText = document.querySelector('.js-statNumber span');
-    let currentStatNumber = statNumber.getAttribute('data-current');
-    let newStatNumber = statNumber.getAttribute('data-swap');
-    statNumberText.textContent = newStatNumber;
-    statNumber.setAttribute('data-current', newStatNumber);
-    statNumber.setAttribute('data-swap', currentStatNumber);
-}
-
-radioButtons.forEach(radio => {
-    radio.addEventListener('change', handleRadioChange);
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    const selectedRadio = document.querySelector('.js-statsRadio:checked');
-    if (selectedRadio) {
-        setStatNumber();
-        handleRadioChange({ target: selectedRadio });
+function getVideoSource(baseName) {
+    var windowWidth = window.innerWidth;
+    if (windowWidth < 768) {
+        return 'video/' + baseName + '_mobile.mp4';
+    } else {
+        return 'video/' + baseName + '_tablet.mp4';
     }
-});
-function initializeSlider() {
-    let ranges = document.querySelectorAll('.js-range');
-    let isUpdating = false;
+}
 
-    ranges.forEach((range) => {
-        let input = range.closest('.calculator__block').querySelector('input');
-        let maxValue = Number(range.getAttribute('data-max'));
-        let startValue = maxValue * 0.1; 
+function getPosterSource(baseName) {
+    return 'video/' + baseName + '_poster.png';
+}
 
-        if (range.noUiSlider) {
-            range.noUiSlider.destroy();
+document.addEventListener('DOMContentLoaded', function () {
+    var tabs = document.querySelectorAll('.js-videoTab');
+    var videoElement = document.getElementById('player');
+    var playBtn = document.querySelector('.js-playBtn');
+    var hideTimer = null; // Таймер для отслеживания времени отсутствия видео в зоне видимости
+
+    if (videoElement) {
+        var player = videojs(videoElement, {
+            fluid: false,
+            aspectRatio: '19:10',
+            autoplay: true,
+            muted: true,
+            loop: true,
+            controls: false
+        });
+
+        function loadVideo(baseName) {
+            var videoSrc = getVideoSource(baseName);
+            //var posterSrc = getPosterSource(baseName);
+            player.src({ type: 'video/mp4', src: videoSrc });
+            //player.poster(posterSrc);
+            player.load();
         }
 
-        const step = maxValue / 10; 
-        noUiSlider.create(range, {
-            start: [startValue], 
-            connect: 'lower',
-            step: step,
-            range: {
-                'min': 0,
-                'max': maxValue
-            },
-            pips: {
-                mode: 'positions',
-                values: [0, 100],
-                density: 4,
-                format: {
-                    to: (value) => value % 1 === 0 ? Math.round(value) : value,
+        if (tabs.length) {
+            var firstBaseName = tabs[0].getAttribute('data-base-name');
+            loadVideo(firstBaseName);
+        }
+
+        tabs.forEach(function (tab) {
+            tab.addEventListener('click', function () {
+                tabs.forEach(function (t) {
+                    t.classList.remove('active');
+                });
+                tab.classList.add('active');
+                var baseName = tab.getAttribute('data-base-name');
+                loadVideo(baseName);
+            });
+        });
+
+        window.addEventListener('resize', function () {
+            var activeTab = document.querySelector('.js-videoTab.active');
+            if (activeTab) {
+                var baseName = activeTab.getAttribute('data-base-name');
+                var newVideoSrc = getVideoSource(baseName);
+                //var newPosterSrc = getPosterSource(baseName);
+                if (player.currentSrc() !== newVideoSrc) {
+                    player.src({ type: 'video/mp4', src: newVideoSrc });
+                    player.load();
                 }
+                //player.poster(newPosterSrc);
             }
         });
 
-        range.noUiSlider.on('update', (values, handle) => {
-            if (isUpdating) return;
-        
-            const value = parseFloat(values[handle]);
-            input.value = value % 1 === 0 ? Math.round(value) : value.toFixed(2); // Ограничиваем до двух знаков после запятой
-        
-            const percentage = Math.round((value / maxValue) * 100);
-        
-            isUpdating = true; 
-            ranges.forEach((otherRange) => {
-                if (otherRange !== range && otherRange.noUiSlider) {
-                    const otherMaxValue = Number(otherRange.getAttribute('data-max'));
-                    let otherInput = otherRange.closest('.calculator__block').querySelector('input');
-                    const newValue = (otherMaxValue * percentage) / 100;
-                    otherInput.value = newValue % 1 === 0 ? Math.round(newValue) : newValue.toFixed(2); // Ограничиваем до двух знаков
-                    otherRange.noUiSlider.set(newValue);
+        // Автоматический автоплей/пауза при изменении видимости блока
+        var observerOptions = {
+            // Срабатываем, когда хотя бы половина элемента в зоне видимости
+            threshold: 0.75
+        };
+
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    // Если видео вновь появилось, сбрасываем таймер сброса и запускаем воспроизведение
+                    if (hideTimer) {
+                        clearTimeout(hideTimer);
+                        hideTimer = null;
+                    }
+                    player.play();
+                } else {
+                    // Если видео выходит из зоны видимости, ставим на паузу
+                    player.pause();
+                    // Запускаем таймер: если видео не появится в зоне видимости более 5 секунд, сбросим время воспроизведения
+                    hideTimer = setTimeout(function () {
+                        player.currentTime(0);
+                    }, 5000);
                 }
             });
-            isUpdating = false; 
-            setStatNumber();
-        });
-        range.noUiSlider.on('start', (values, handle) => {
-            ym(99489613, 'reachGoal', 'calc'); 
-        });
-    });
-}
+        }, observerOptions);
 
+        observer.observe(videoElement);
+    }
+
+    if (playBtn) {
+        playBtn.addEventListener('click', function () {
+            playBtn.classList.toggle('paused');
+            if (player.paused()) {
+                player.play();
+            } else {
+                player.pause();
+            }
+        });
+    }
+});
 
 const backBtn = document.querySelector('.js-backBtn');
 
@@ -1302,18 +1495,12 @@ function copyToClipboard(text, event) {
     document.execCommand('copy');
     document.body.removeChild(textArea);
     event.target.classList.add('copied');
-    if (document.querySelector('body').classList.contains('en')) {
-        event.target.textContent = 'Copied';
-    } else {
-        event.target.textContent = 'Скопировано';
-    }
+    let newText = event.target.getAttribute('data-swap');
+    let oldText = event.target.textContent;
+    event.target.textContent = newText;
     setTimeout(() => {
         event.target.classList.remove('copied');
-        if (document.querySelector('body').classList.contains('en')) {
-            event.target.textContent = 'Copy address';
-        } else {
-            event.target.textContent = 'Копировать';
-        }
+        event.target.textContent = oldText;
     }, 5000);
 }
 
